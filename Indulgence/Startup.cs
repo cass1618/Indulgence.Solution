@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Park.Models;
+using Indulgence.Models;
 
-namespace Park
+namespace Indulgence
 {
     public class Startup
     {
@@ -21,7 +21,7 @@ namespace Park
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<ParkContext>(opt =>
+            services.AddDbContext<IndulgenceContext>(opt =>
                 opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
             services.AddControllers();
         }
