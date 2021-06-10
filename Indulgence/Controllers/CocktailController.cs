@@ -1,11 +1,11 @@
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using Indulgence.Models;
+using System.Linq;
+using System;
 
 namespace Indulgence.Controllers
 {
@@ -21,13 +21,13 @@ namespace Indulgence.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cocktail>>> Get(string spirit)
+    public async Task<ActionResult<IEnumerable<Cocktail>>> Get(Ingredient ingredienttype)
     {
       var query = _db.Cocktails.AsQueryable();
 
-      if (spirit != null)
+      if (ingredienttype != null)
       {
-        query = query.Where(entry => entry.Species == spirit);
+        query = query.Where(entry => entry.Ingredients.Contains(ingredienttype));
       }
 
       return await query.ToListAsync();
